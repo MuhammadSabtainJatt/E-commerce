@@ -28,13 +28,12 @@ const Hero = () => {
     const handleFilterItems = (prop) => {
         handleGetItems();
         try {
-            const FilterItems = data.filter((items) => items.category === prop);
-            setData(FilterItems);
+            const filteredItems = data.filter((item) => item.category === prop);
+            setData(filteredItems);
         } catch (error) {
             console.log(error);
             message.error('Something went wrong while filtering items');
         }
-        console.log(data);
     };
 
     return (
@@ -54,11 +53,11 @@ const Hero = () => {
                     </Col>
                 </Row>
                 <br /><br />
-                <div className="btn btn-success" onClick={handleGetItems}>All </div>
-                <div className="btn btn-success" onClick={() => handleFilterItems("men's clothing")}>Men's clothing</div>
-                <div className="btn btn-success" onClick={() => handleFilterItems("jewelery")}>Jewelry</div>
-                <div className="btn btn-success" onClick={() => handleFilterItems("electronics")}>Electronics</div>
-                <div className="btn btn-success" onClick={() => handleFilterItems("women's clothing")}>Women's clothing</div>
+                <div className="btn btn-success m-1" onClick={handleGetItems}>All </div>
+                <div className="btn btn-success m-1" onClick={() => handleFilterItems("men's clothing")}>Men's clothing</div>
+                <div className="btn btn-success m-1" onClick={() => handleFilterItems("jewelery")}>Jewelry</div>
+                <div className="btn btn-success m-1" onClick={() => handleFilterItems("electronics")}>Electronics</div>
+                <div className="btn btn-success m-1" onClick={() => handleFilterItems("women's clothing")}>Women's clothing</div>
                 <br /><br />
                 <hr />
                 <Row>
@@ -73,7 +72,7 @@ const Hero = () => {
                                             <RatingStars rating={item.rating.rate} />
                                         </div>
                                         <div className="mt-2">
-                                            <button className="btn btn-success" onClick={() => Navigate(`detail/:${item.id}`)}>
+                                            <button className="btn btn-success" onClick={() => Navigate(`detail/${item.id}`)}>
                                                 Detail
                                             </button>
                                         </div>
