@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const Navigate=useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,6 +61,9 @@ const Header = () => {
               <Button style={{ border: 'none', background: 'transparent', color: '#000' }}>
                 <FontAwesomeIcon icon={faSearch} style={{ border: 'none', background: 'none' }} />
               </Button>
+              <Button style={{ border: 'none', background: 'transparent', color: '#000',fontSize:"30px" }} onClick={() => Navigate(`cart`)}>
+                <FontAwesomeIcon icon={faCartShopping} style={{ border: 'none', background: 'none' }} />
+              </Button> 
             </div>
           </Form>
         </Container>

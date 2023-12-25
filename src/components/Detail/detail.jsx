@@ -1,12 +1,15 @@
 import { Image, message } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { useCart } from '../CartContext/cartcontext';
 import { useParams } from 'react-router-dom';
 import RatingStars from '../Hero/RatingStars';
-import {ShoppingCartOutlined  } from '@ant-design/icons';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const Detail = () => {
   const [data, setData] = useState([]);
   const param = useParams();
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products/')
@@ -23,19 +26,17 @@ const Detail = () => {
       });
   }, [param.id]);
 
-  const   handleAddCart=(name)=>{
-    message.success(`${name} is Added to Cart`)
-  }
+  const handleAddCart = (product) => {
+    message.success(`${product.title} is Added to Cart`);
+    addToCart(product);
+  };
 
-
-
-console.log(data)
   return (
-    <div className="container d-flex align-items-center justify-content-center " style={{minHeight:"100vh"}}>
-      {data.map((item) => (
-        <div key={item.id} className="row  p-4 rounded ">
+    <div className="container d-flex align-items-center justify-content-center " style={{ minHeight: "100vh" }}>
+      {data.length > 0 && data.map((item) => (
+        <div key={item.id} className="row p-4 rounded ">
           <div className="col-12 col-md-6 text-center">
-            <Image style={{maxWidth:300}} src={item.image} />
+            <Image style={{ maxWidth: 300 }} src={item.image} />
           </div>
           <div className="col-12 col-md-6 m-auto">
             <h2>{item.title}</h2>
@@ -44,7 +45,7 @@ console.log(data)
             <div className="rating-stars">
               <RatingStars rating={item.rating.rate} />
             </div>
-            <div className="btn btn-success mt-4" onClick={()=>handleAddCart(item.title)}>
+            <div className="btn btn-success mt-4" onClick={() => handleAddCart(item)}>
               Add to Cart <ShoppingCartOutlined />
             </div>
           </div>
