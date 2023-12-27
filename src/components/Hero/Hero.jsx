@@ -85,7 +85,7 @@ const Hero = () => {
                     <div className="row">
                         {filteredData.map((item) => (
                             <div className="col-12 col-md-6 col-lg-3" key={item.id}>
-                                <div className="card shadow p-2 mx-auto" style={{ width: '16rem', height: '33rem' }}>
+                                <div className="card shadow p-2 mx-auto m-1" style={{ width: '16rem', height: '33rem' }}>
                                     <img className="card-img-top" style={{ height: '300px' }} src={item.image} alt="Card image cap" />
                                     <div className="card-body d-flex flex-column justify-content-between">
                                         <div>

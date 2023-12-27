@@ -3,10 +3,13 @@ import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import{useCart} from '../CartContext/cartcontext'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const {cart}=useCart()
   const Navigate=useNavigate()
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +34,7 @@ const Header = () => {
           backgroundColor: isScrolled ? '#ffe5d9' : '#ffcad4',
           borderBottomRadius: '10px', // Corrected the typo here
         }}
-      >
+        >
         <Container>
           <Navbar.Brand href="#">
             <img

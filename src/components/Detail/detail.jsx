@@ -1,15 +1,15 @@
 import { Image, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../CartContext/cartcontext';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import RatingStars from '../Hero/RatingStars';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const Detail = () => {
   const [data, setData] = useState([]);
   const param = useParams();
-
-  const { addToCart } = useCart();
+const Navigate = useNavigate()
+  const { addToCart,cart } = useCart();
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products/')
@@ -25,11 +25,24 @@ const Detail = () => {
         message.error('Something went wrong while fetching items');
       });
   }, [param.id]);
+// Function to handle adding a product to the cart
+const handleAddCart = (product) => {
+  // Check if the item is already in the cart
+  const isItemInCart = cart.some((item) => item.id === product.id);
 
-  const handleAddCart = (product) => {
-    message.success(`${product.title} is Added to Cart`);
+  // If the item is already in the cart, show a warning message
+  if (isItemInCart) {
+    message.warning(`${product.title} is already in the Cart`);
+  } else {
+    // If the item is not in the cart, add it to the cart and show a success message
     addToCart(product);
-  };
+    message.success(`${product.title} is added to Cart`);
+  }
+
+  // Navigate to the home page ("/") after handling the cart action
+  Navigate("/");
+};
+
 
   return (
     <div className="container d-flex align-items-center justify-content-center " style={{ minHeight: "100vh" }}>
