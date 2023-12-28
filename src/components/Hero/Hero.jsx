@@ -9,7 +9,6 @@ const Hero = () => {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const Navigate = useNavigate();
-
     useEffect(() => {
         handleGetItems();
     }, []);
@@ -23,7 +22,7 @@ const Hero = () => {
             })
             .catch((error) => {
                 console.log(error);
-                message.error('Something went wrong while fetching items');
+                message.error('Network Problem');
             });
     };
 
@@ -33,7 +32,6 @@ const Hero = () => {
             setFilteredData(filteredItems);
         } catch (error) {
             console.log(error);
-            message.error('Something went wrong while filtering items');
         }
     };
 
@@ -41,7 +39,7 @@ const Hero = () => {
         <>
             <Header />
             <Container fluid style={{ height: '100vh' }} className="mt-5">
-                <Row style={{ backgroundColor: '#ffcad4' }}>
+                <Row style={{ backgroundColor: '#fff' }}>
                     <Col md={6} className="h-90 d-flex align-items-center justify-content-center p-5 text-white">
                         <img
                             src="https://printmagic.net.au/wp-content/uploads/2021/02/Shopping-Girl2-e1612179006739.png"
